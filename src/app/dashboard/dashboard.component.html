@@ -1,0 +1,82 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>COVID 19 Information</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-accordion *ngIf="summary">
+  <mat-expansion-panel expanded="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h4>Global - A summary of new and total cases updated daily</h4>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>Date : {{ summary.Global?.Date }}</p>
+    <p>New Confirmed : {{ summary.Global?.NewConfirmed }}</p>
+    <p>Total Confirmed : {{ summary.Global?.TotalConfirmed }}</p>
+    <p>New Deaths : {{ summary.Global?.NewDeaths }}</p>
+    <p>Total Deaths : {{ summary.Global?.TotalDeaths }}</p>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<mat-form-field appearance="fill">
+  <mat-label>All Countries</mat-label>
+  <mat-select (selectionChange)="onCountryChange($event)">
+    <mat-option *ngFor="let country of countriesList" [value]="country.Slug">
+      {{ country.Country }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div *ngIf="countryChangeVal == 'all'">
+  <mat-accordion *ngFor="let country of summary.Countries">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h4>{{ country.Country }}</h4>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>Date : {{ summary.Global?.Date }}</p>
+      <p>New Confirmed : {{ country?.NewConfirmed }}</p>
+      <p>Total Confirmed : {{ country?.TotalConfirmed }}</p>
+      <p>New Deaths : {{ country?.NewDeaths }}</p>
+      <p>Total Deaths : {{ country?.TotalDeaths }}</p>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+<div *ngIf="countryChangeVal != 'all' && specificCountryData">
+  <mat-accordion>
+    <mat-expansion-panel expanded="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h4>{{ specificCountryData.Country }}</h4>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>Date : {{ specificCountryData.Date }}</p>
+      <p>Confirmed : {{ specificCountryData?.Confirmed }}</p>
+      <p>Deaths : {{ specificCountryData?.Deaths }}</p>
+      <p>Recovered : {{ specificCountryData?.Recovered }}</p>
+      <p>Active : {{ specificCountryData?.Active }}</p>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+<!--  <mat-card fxLayout="row" fxLayoutAlign="center center" class="mat-card-main">
+    <mat-card-title> Summary </mat-card-title>
+    <mat-card-content> </mat-card-content>
+  </mat-card>
+
+  <mat-card fxLayout="row" fxLayoutAlign="center center" class="mat-card-main">
+    <mat-form-field appearance="fill">
+      <mat-label>All Countries</mat-label>
+      <mat-select>
+        <mat-option
+          *ngFor="let country of countriesList"
+          [value]="country.Slug"
+        >
+          {{ country.Country }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card> -->

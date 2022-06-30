@@ -1,0 +1,22 @@
+.mat-toolbar-multiple-rows{
+  min-height: 44px !important;
+}
+.mat-toolbar-row{
+  height: 48px !important;
+}
+.mat-card-main{
+  padding: 8px !important;
+}
+.dashboard-content{
+::ng-deep .mat-figure {
+  display: grid !important;
+}
+
+::ng-deep .mat-grid-tile{
+    border: 1px solid;
+    background: #f4f4f4;
+}
+}
+::ng-deep mat-accordion{
+  margin-top: 10px !important;
+}
